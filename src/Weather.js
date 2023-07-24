@@ -5,10 +5,10 @@ import axios from "axios";
 import "./Weather.css";
 
 export default function Weather(props) {
-    const [city,setCity] = useState(props.defaultCity);
     const [weatherData, setWeatherData] = useState({ ready: false });
+    const [city, setCity] = useState(props.defaultCity);
+    
     function handleResponse(response) {
-        console.log(response.data);
         setWeatherData({
             ready: true,
             coordinates: response.data.coordinates,
@@ -22,13 +22,6 @@ export default function Weather(props) {
     });
     }
 
-    function search() {
-        const apiKey ="0f394coc58tc83ab43c50095f3bd3ad9";
-        let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
-        axios.get(apiUrl).then(handleResponse);
-
-    }
-
     function handleSubmit(event) {
         event.preventDefault();
         search(city);
@@ -36,6 +29,13 @@ export default function Weather(props) {
 
     function handleCityChange(event) {
         setCity(event.target.value);
+    }
+    
+    function search() {
+        const apiKey ="0f394coc58tc83ab43c50095f3bd3ad9";
+        let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
+        axios.get(apiUrl).then(handleResponse);
+
     }
 
     if (weatherData.ready) {
