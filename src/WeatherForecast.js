@@ -10,28 +10,21 @@ export default function WeatherForecast(props) {
 
     useEffect(() => {
         setLoaded(false);
-        let apiKey = "0f394coc58tc83ab43c50095f3bd3ad9";
-        let longitude = props.coordinates.longitude;
-        let latitude = props.coordinates.latitude;
-        let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=imperial`;
-
-        axios.get(apiUrl).then(handleResponse);
-        }, [props.coordinates, unit]);
+        }, [props.coordinates]);
 
     function handleResponse(response) {
         setForecast(response.data.daily);
         setLoaded(true);
     }
 
-    function showCelsius(event) {
-    event.preventDefault();
-    setUnit("celsius");
-  }
+    function load() {
+        let apiKey = "0f394coc58tc83ab43c50095f3bd3ad9";
+        let longitude = props.coordinates.longitude;
+        let latitude = props.coordinates.latitude;
+        let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=imperial`;
 
-  function showFahrenheit(event) {
-    event.preventDefault();
-    setUnit("fahrenheit");
-  }
+        axios.get(apiUrl).then(handleResponse);
+    }
     
     if (loaded) {
         return (
@@ -41,16 +34,17 @@ export default function WeatherForecast(props) {
                         if (index < 6 ) {
                             return (
                                 <div className="col" key={index}>
-                                    <WeatherForecastDay data={dailyForecast} unit={unit} showCelsius={showCelsius} showFahrenheit={showFahrenheit} />
+                                    <WeatherForecastDay data={dailyForecast} />
                                 </div>
                             );
                         }
-                        return null;
                     })}
                 </div>
             </div>
         );
     } else {
+        load();
+
         return null;
     }
 }
