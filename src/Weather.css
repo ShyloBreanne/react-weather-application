@@ -19,6 +19,21 @@
     border-color: #9f79e2;
 }
 
+.Weather .form-control::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #4f3b78;
+}
+
+.Weather .form-control:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #4f3b78;
+}
+
+.Weather .form-control::-ms-input-placeholder {
+    /*Microsoft Edge */
+    color: #4f3b78
+}
+
 .btn {
     text-decoration: none;
     color: #4f3b78;
