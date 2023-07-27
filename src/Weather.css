@@ -6,6 +6,12 @@
     border-radius: 30px;
 }
 
+body,
+a,
+a:hover {
+    cursor: url(https://cur.cursors-4u.net/others/oth-8/oth713.png), progress;
+}
+
 .Weather form {
     padding: 10px;
 }
